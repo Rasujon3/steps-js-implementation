@@ -16,56 +16,153 @@
     <link href="{{ asset('css/jquery.steps.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
 <body>
-    <form id="example-advanced-form" action="#">
-        <h3>Account</h3>
-        <fieldset>
-            <legend>Account Information</legend>
+    <form id="example-advanced-form" action="#" class="form-control">
+        <h3>Personal Information</h3>
+        <fieldset class="align-middle">
+            <legend>Personal Information</legend>
 
-            <label for="userName-2">User name *</label>
-            <input id="userName-2" name="userName" type="text" class="required">
-            <label for="password-2">Password *</label>
-            <input id="password-2" name="password" type="text" class="required">
-            <label for="confirm-2">Confirm Password *</label>
-            <input id="confirm-2" name="confirm" type="text" class="required">
-            <p>(*) Mandatory</p>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control w-25" id="name" placeholder="Enter Your Name">
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
+                <input type="number" class="form-control w-25" id="age" placeholder="Enter Your Age">
+            </div>
+            <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
+                <input type="number" class="form-control w-25" id="mobile" placeholder="Enter Your Mobile Number">
+            </div>
+            <div class="mb-3">
+                <label for="nid" class="form-label">NID <span class="text-danger">*</span></label>
+                <input type="number" class="form-control w-25" id="nid" placeholder="Enter Your NID Number">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+                <textarea type="text" class="form-control w-25" id="address" placeholder="Enter Your Address"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender <span class="text-danger me-2">*</span></label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                        value="option1" checked>
+                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                        value="option2">
+                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                </div>
+                <div class="form-check form-check-inline ">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                        value="option3">
+                    <label class="form-check-label" for="inlineRadio3">Others</label>
+                </div>
+            </div>
+
         </fieldset>
 
-        <h3>Profile</h3>
+        <h3>Educational Qualifications</h3>
         <fieldset>
-            <legend>Profile Information</legend>
+            <legend>Educational Qualifications</legend>
 
-            <label for="name-2">First name *</label>
-            <input id="name-2" name="name" type="text" class="required">
-            <label for="surname-2">Last name *</label>
-            <input id="surname-2" name="surname" type="text" class="required">
-            <label for="email-2">Email *</label>
-            <input id="email-2" name="email" type="text" class="required email">
-            <label for="address-2">Address</label>
-            <input id="address-2" name="address" type="text">
-            <label for="age-2">Age (The warning step will show up if age is less than 18) *</label>
-            <input id="age-2" name="age" type="text" class="required number">
-            <p>(*) Mandatory</p>
+            <div class="mb-3">
+                <label for="ssc" class="form-label">SSC <span class="text-danger">*</span></label>
+                <div class="container">
+                    <div class="row w-50">
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="ssc" placeholder="Enter Your GPA">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="ssc"
+                                placeholder="Enter Your Passing Year">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="hsc" class="form-label">HSC <span class="text-danger">*</span></label>
+                <div class="container">
+                    <div class="row w-50">
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="hsc" placeholder="Enter Your GPA">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="hsc"
+                                placeholder="Enter Your Passing Year">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="bsc" class="form-label">B.SC <span class="text-danger">*</span></label>
+                <div class="container">
+                    <div class="row w-50">
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="bsc" placeholder="Enter Your CGPA">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="bsc"
+                                placeholder="Enter Your Passing Year">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="msc" class="form-label">M.SC </label>
+                <div class="container">
+                    <div class="row w-50">
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="msc" placeholder="Enter Your CGPA">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="msc"
+                                placeholder="Enter Your Passing Year">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </fieldset>
 
-        <h3>Warning</h3>
+        <h3>Professional Information</h3>
         <fieldset>
-            <legend>You are to young</legend>
+            <legend>Professional Information</legend>
 
-            <p>Please go away ;-)</p>
+            <div class="mb-3">
+                <label for="previous_company_name" class="form-label">Previous Company Name <span
+                        class="text-danger">*</span></label>
+                <input type="text" class="form-control w-25" id="previous_company_name"
+                    placeholder="Enter Your Previous Company Name">
+            </div>
+            <div class="mb-3">
+                <label for="designation" class="form-label">Designation <span class="text-danger">*</span></label>
+                <input type="text" class="form-control w-25" id="designation"
+                    placeholder="Enter Your Designation">
+            </div>
+            <div class="mb-3">
+                <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
+                <input type="number" class="form-control w-25" id="experience"
+                    placeholder="Enter Your Years of Experience">
+            </div>
+            <div class="mb-3">
+                <label for="current_Salary" class="form-label">Current Salary <span
+                        class="text-danger">*</span></label>
+                <input type="number" class="form-control w-25" id="current_Salary"
+                    placeholder="Enter Your Current Salary">
+            </div>
         </fieldset>
 
-        <h3>Finish</h3>
-        <fieldset>
-            <legend>Terms and Conditions</legend>
-
-            <input id="acceptTerms-2" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms-2">I
-                agree with the Terms and Conditions.</label>
-        </fieldset>
     </form>
 
+    {{-- Bootstrap 5 Script File --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
     {{-- Steps JS Script --}}
     <script>
         var form = $("#example-advanced-form").show();
