@@ -10,12 +10,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="{{ asset('js/jquery.steps.js') }}"></script>
     <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
+    {{-- jquery validation CDN --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
         integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="{{ asset('css/jquery.steps.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    {{-- Bootstrap CSS CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
@@ -28,40 +30,44 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control w-25" id="name" placeholder="Enter Your Name">
+                <input type="text" class="form-control w-25" id="name" name="name"
+                    placeholder="Enter Your Name">
             </div>
             <div class="mb-3">
                 <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="age" placeholder="Enter Your Age">
+                <input type="number" class="form-control w-25" id="age" name="age"
+                    placeholder="Enter Your Age">
             </div>
             <div class="mb-3">
                 <label for="mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="mobile" placeholder="Enter Your Mobile Number">
+                <input type="number" class="form-control w-25" id="mobile" name="mobile"
+                    placeholder="Enter Your Mobile Number">
             </div>
             <div class="mb-3">
                 <label for="nid" class="form-label">NID <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="nid" placeholder="Enter Your NID Number">
+                <input type="number" class="form-control w-25" id="nid" name="nid"
+                    placeholder="Enter Your NID Number">
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
-                <textarea type="text" class="form-control w-25" id="address" placeholder="Enter Your Address"></textarea>
+                <textarea type="text" class="form-control w-25" id="address" name="address" placeholder="Enter Your Address"></textarea>
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender <span class="text-danger me-2">*</span></label>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="male"
                         value="option1" checked>
-                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                    <label class="form-check-label" for="male">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="female"
                         value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                    <label class="form-check-label" for="female">Female</label>
                 </div>
                 <div class="form-check form-check-inline ">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="others"
                         value="option3">
-                    <label class="form-check-label" for="inlineRadio3">Others</label>
+                    <label class="form-check-label" for="others">Others</label>
                 </div>
             </div>
 
@@ -76,10 +82,11 @@
                 <div class="container">
                     <div class="row w-50">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="ssc" placeholder="Enter Your GPA">
+                            <input type="number" class="form-control" id="ssc_gpa" name="ssc_gpa"
+                                placeholder="Enter Your GPA">
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="ssc"
+                            <input type="number" class="form-control" id="ssc_year" name="ssc_year"
                                 placeholder="Enter Your Passing Year">
                         </div>
                     </div>
@@ -90,10 +97,11 @@
                 <div class="container">
                     <div class="row w-50">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="hsc" placeholder="Enter Your GPA">
+                            <input type="number" class="form-control" id="hsc_gpa" name="hsc_gpa"
+                                placeholder="Enter Your GPA">
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="hsc"
+                            <input type="number" class="form-control" id="hsc_year" name="hsc_year"
                                 placeholder="Enter Your Passing Year">
                         </div>
                     </div>
@@ -104,10 +112,11 @@
                 <div class="container">
                     <div class="row w-50">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="bsc" placeholder="Enter Your CGPA">
+                            <input type="number" class="form-control" id="bsc_cgpa" name="bsc_cgpa"
+                                placeholder="Enter Your CGPA">
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="bsc"
+                            <input type="number" class="form-control" id="bsc_year" name="bsc_year"
                                 placeholder="Enter Your Passing Year">
                         </div>
                     </div>
@@ -137,22 +146,22 @@
                 <label for="previous_company_name" class="form-label">Previous Company Name <span
                         class="text-danger">*</span></label>
                 <input type="text" class="form-control w-25" id="previous_company_name"
-                    placeholder="Enter Your Previous Company Name">
+                    name="previous_company_name" placeholder="Enter Your Previous Company Name">
             </div>
             <div class="mb-3">
                 <label for="designation" class="form-label">Designation <span class="text-danger">*</span></label>
-                <input type="text" class="form-control w-25" id="designation"
+                <input type="text" class="form-control w-25" id="designation" name="designation"
                     placeholder="Enter Your Designation">
             </div>
             <div class="mb-3">
                 <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="experience"
+                <input type="number" class="form-control w-25" id="experience" name="experience"
                     placeholder="Enter Your Years of Experience">
             </div>
             <div class="mb-3">
                 <label for="current_Salary" class="form-label">Current Salary <span
                         class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="current_Salary"
+                <input type="number" class="form-control w-25" id="current_Salary" name="current_salary"
                     placeholder="Enter Your Current Salary">
             </div>
         </fieldset>
@@ -177,7 +186,11 @@
                     return true;
                 }
                 // Forbid next action on "Warning" step if the user is to young
-                if (newIndex === 3 && Number($("#age-2").val()) < 18) {
+                if (newIndex === 3 && ($("#age").val()) == "") {
+                    return false;
+                }
+                // Forbid next action on "Warning" step if the user is to young
+                if (newIndex === 1 && Number($("#age-2").val()) < 18) {
                     return false;
                 }
                 // Needed in some cases if the user went back (clean up)
@@ -190,10 +203,6 @@
                 return form.valid();
             },
             onStepChanged: function(event, currentIndex, priorIndex) {
-                // Used to skip the "Warning" step if the user is old enough.
-                if (currentIndex === 2 && Number($("#age-2").val()) >= 18) {
-                    form.steps("next");
-                }
                 // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
                 if (currentIndex === 2 && priorIndex === 3) {
                     form.steps("previous");
@@ -208,15 +217,45 @@
             }
         }).validate({
             errorPlacement: function errorPlacement(error, element) {
-                element.before(error);
+                element.after(error);
             },
             rules: {
-                confirm: {
-                    equalTo: "#password-2"
-                }
-            }
+                name: "required",
+                age: "required",
+                mobile: "required",
+                nid: "required",
+                address: "required",
+                ssc_gpa: "required",
+                ssc_year: "required",
+                hsc_gpa: "required",
+                hsc_year: "required",
+                bsc_cgpa: "required",
+                bsc_year: "required",
+                previous_company_name: "required",
+                designation: "required",
+                experience: "required",
+                current_salary: "required",
+            },
+            messages: {
+                name: "Please enter your name",
+                age: "Please enter your age",
+                mobile: "Please enter your mobile number",
+                nid: "Please enter your NID number",
+                address: "Please enter your address",
+                ssc_gpa: "Please enter your SSC GPA",
+                ssc_year: "Please enter your SSC passing year",
+                hsc_gpa: "Please enter your HSC GPA",
+                hsc_year: "Please enter your HSC passing year",
+                bsc_cgpa: "Please enter your B.SC CGPA",
+                bsc_year: "Please enter your B.SC passing year",
+                previous_company_name: "Please enter your previous company name",
+                designation: "Please enter your designation",
+                experience: "Please enter your years of experience",
+                current_salary: "Please enter your current salary",
+            },
         });
     </script>
+
 </body>
 
 </html>
