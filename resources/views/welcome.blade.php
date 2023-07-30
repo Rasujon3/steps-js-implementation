@@ -23,9 +23,10 @@
 </head>
 
 <body>
-    <form id="example-advanced-form" action="#" class="form-control">
+    <form id="example-advanced-form" action="{{ url('/inserData') }}" class="form-control" method="post">
+        @csrf
         <h3>Personal Information</h3>
-        <fieldset class="align-middle">
+        <fieldset>
             <legend>Personal Information</legend>
 
             <div class="mb-3">
@@ -55,18 +56,15 @@
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender <span class="text-danger me-2">*</span></label>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="male"
-                        value="option1" checked>
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
                     <label class="form-check-label" for="male">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="female"
-                        value="option2">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="female">
                     <label class="form-check-label" for="female">Female</label>
                 </div>
                 <div class="form-check form-check-inline ">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="others"
-                        value="option3">
+                    <input class="form-check-input" type="radio" name="gender" id="others" value="others">
                     <label class="form-check-label" for="others">Others</label>
                 </div>
             </div>
@@ -127,10 +125,11 @@
                 <div class="container">
                     <div class="row w-50">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="msc" placeholder="Enter Your CGPA">
+                            <input type="number" class="form-control" id="msc_cgpa" name="msc_cgpa"
+                                placeholder="Enter Your CGPA">
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="msc"
+                            <input type="number" class="form-control" id="msc_year" name="msc_year"
                                 placeholder="Enter Your Passing Year">
                         </div>
                     </div>
@@ -165,7 +164,6 @@
                     placeholder="Enter Your Current Salary">
             </div>
         </fieldset>
-
     </form>
 
     {{-- Bootstrap 5 Script File --}}
@@ -213,7 +211,7 @@
                 return form.valid();
             },
             onFinished: function(event, currentIndex) {
-                alert("Submitted!");
+                form.submit();
             }
         }).validate({
             errorPlacement: function errorPlacement(error, element) {
