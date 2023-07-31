@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Libraries\Encryption;
 use Yajra\DataTables\DataTables;
 
 class EmployeeController extends Controller
@@ -41,18 +42,29 @@ class EmployeeController extends Controller
     }
     public function ShowEmployee(Request $request) {
         $data = DB::table('employee')->select()->get();
+        // dd($data);
 
         if ($request->ajax()) {
             // dd($request->ajax());
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a>
+                                  <a href="' . route('emp.delete', ($row->id)) . ' "  class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
         return view('employees');
+    }
+    public function DeleteEmployee($id) {
+        $delete = DB::table('employee')->where('id',$id)->delete();
+        if ($delete) {
+            return redirect('/employees');
+        } else {
+            return 'Data delete failed';
+
+        }
     }
 }

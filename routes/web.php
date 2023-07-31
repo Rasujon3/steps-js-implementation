@@ -17,6 +17,7 @@ use App\Http\Controllers\EmployeeController;
 Route::get('/', [EmployeeController::class, 'ShowForms']);
 Route::post('/inserData', [EmployeeController::class, 'InsertData']);
 Route::get('/employees',[EmployeeController::class, 'ShowEmployee'])->name('ShowEmployee');
+Route::get('/employees/{id}',[EmployeeController::class, 'DeleteEmployee'])->name('emp.delete');
 
 Route::get('/index', function () {
     return view('index');
