@@ -34,7 +34,7 @@ class EmployeeController extends Controller
             'current_salary'=>$req->current_salary,
         ]);
         if ($insert) {
-            return redirect('/');
+            return redirect('/employees');
         } else {
             return 'Data insert failed';
 
@@ -49,8 +49,8 @@ class EmployeeController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a>
-                                  <a href="' . route('emp.delete', ($row->id)) . ' "  class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="' . route('employee.edit', ($row->id)) . ' " class="edit btn btn-success btn-sm">Edit</a>
+                                  <a href="' . route('employee.delete', ($row->id)) . ' "  class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -66,5 +66,40 @@ class EmployeeController extends Controller
             return 'Data delete failed';
 
         }
+    }
+
+    public function EditEmployee($id) {
+        $employee = DB::table('employee')->where('id',$id)->first();
+        return view('edit',compact('employee'));
+
+    }
+
+    public function UpdateData($id,Request $req) {
+        $update = DB::table('employee')->where('id',$id)->update([
+            'name'=>$req->name,
+            'age'=>$req->age,
+            'mobile'=>$req->mobile,
+            'nid'=>$req->nid,
+            'address'=>$req->address,
+            'gender'=>$req->gender,
+            'ssc_gpa'=>$req->ssc_gpa,
+            'ssc_year'=>$req->ssc_year,
+            'hsc_gpa'=>$req->hsc_gpa,
+            'hsc_year'=>$req->hsc_year,
+            'bsc_cgpa'=>$req->bsc_cgpa,
+            'bsc_year'=>$req->bsc_year,
+            'msc_cgpa'=>$req->msc_cgpa,
+            'msc_year'=>$req->msc_year,
+            'previous_company_name'=>$req->previous_company_name,
+            'designation'=>$req->designation,
+            'experience'=>$req->experience,
+            'current_salary'=>$req->current_salary,
+        ]);
+        if ($update) {
+            return redirect('/employees');
+        } else {
+            return "Update Failed";
+        }
+
     }
 }
