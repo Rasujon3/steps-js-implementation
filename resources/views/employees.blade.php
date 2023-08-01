@@ -14,7 +14,10 @@
 
 <body>
     <div class="container">
-        <h2 class="mb-5">Employees</h2>
+        <h2 class="mb-5 text-center">Employees</h2>
+        <div class="d-flex justify-content-center">
+            <a href="/" class="btn btn-warning items-center">Back Home</a>
+        </div>
         <div class="table-responsive">
             {{-- <table class="table table-bordered data-table"> --}}
             <table class="table table-striped  dt-responsive data-table" cellspacing="0" width="100%">
@@ -38,7 +41,7 @@
                         <th>designation</th>
                         <th>experience</th>
                         <th>current_salary</th>
-                        <th width="105px">Action</th>
+                        <th width="505px">Action</th>
                     </tr>
                 </thead>
                 <tbody>
