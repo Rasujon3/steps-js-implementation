@@ -23,6 +23,7 @@
             <table class="table table-striped  dt-responsive data-table" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>name</th>
                         <th>age</th>
                         <th>mobile</th>
@@ -65,6 +66,10 @@
                     method: 'GET'
                 },
                 columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
                         data: 'name',
                         name: 'name'
                     },

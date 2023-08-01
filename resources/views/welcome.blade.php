@@ -23,6 +23,21 @@
 </head>
 
 <body>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <!-- Display error message if available -->
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <form id="example-advanced-form" action="{{ url('/inserData') }}" class="form-control" method="post">
         @csrf
         <h3>Personal Information</h3>
@@ -32,26 +47,26 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control w-25" id="name" name="name"
-                    placeholder="Enter Your Name">
+                    value="{{ old('name') }}" placeholder="Enter Your Name">
             </div>
             <div class="mb-3">
                 <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="age" name="age"
-                    placeholder="Enter Your Age">
+                    value="{{ old('age') }}" placeholder="Enter Your Age">
             </div>
             <div class="mb-3">
                 <label for="mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="mobile" name="mobile"
-                    placeholder="Enter Your Mobile Number">
+                    value="{{ old('mobile') }}" placeholder="Enter Your Mobile Number">
             </div>
             <div class="mb-3">
                 <label for="nid" class="form-label">NID <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="nid" name="nid"
-                    placeholder="Enter Your NID Number">
+                    value="{{ old('nid') }}" placeholder="Enter Your NID Number">
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
-                <textarea type="text" class="form-control w-25" id="address" name="address" placeholder="Enter Your Address"></textarea>
+                <textarea type="text" class="form-control w-25" id="address" name="address" placeholder="Enter Your Address">{{ old('address') }}</textarea>
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender <span class="text-danger me-2">*</span></label>
@@ -81,11 +96,11 @@
                     <div class="row w-50">
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="ssc_gpa" name="ssc_gpa"
-                                placeholder="Enter Your GPA">
+                                value="{{ old('ssc_gpa') }}" placeholder="Enter Your GPA">
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="ssc_year" name="ssc_year"
-                                placeholder="Enter Your Passing Year">
+                                value="{{ old('ssc_year') }}" placeholder="Enter Your Passing Year">
                         </div>
                     </div>
                 </div>
@@ -96,11 +111,11 @@
                     <div class="row w-50">
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="hsc_gpa" name="hsc_gpa"
-                                placeholder="Enter Your GPA">
+                                value="{{ old('hsc_gpa') }}" placeholder="Enter Your GPA">
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="hsc_year" name="hsc_year"
-                                placeholder="Enter Your Passing Year">
+                                value="{{ old('hsc_year') }}" placeholder="Enter Your Passing Year">
                         </div>
                     </div>
                 </div>
@@ -111,11 +126,11 @@
                     <div class="row w-50">
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="bsc_cgpa" name="bsc_cgpa"
-                                placeholder="Enter Your CGPA">
+                                value="{{ old('bsc_cgpa') }}" placeholder="Enter Your CGPA">
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="bsc_year" name="bsc_year"
-                                placeholder="Enter Your Passing Year">
+                                value="{{ old('bsc_year') }}" placeholder="Enter Your Passing Year">
                         </div>
                     </div>
                 </div>
@@ -126,11 +141,11 @@
                     <div class="row w-50">
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="msc_cgpa" name="msc_cgpa"
-                                placeholder="Enter Your CGPA">
+                                value="{{ old('msc_cgpa') }}" placeholder="Enter Your CGPA">
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="msc_year" name="msc_year"
-                                placeholder="Enter Your Passing Year">
+                                value="{{ old('msc_year') }}" placeholder="Enter Your Passing Year">
                         </div>
                     </div>
                 </div>
@@ -145,23 +160,27 @@
                 <label for="previous_company_name" class="form-label">Previous Company Name <span
                         class="text-danger">*</span></label>
                 <input type="text" class="form-control w-25" id="previous_company_name"
-                    name="previous_company_name" placeholder="Enter Your Previous Company Name">
+                    name="previous_company_name" value="{{ old('previous_company_name') }}"
+                    placeholder="Enter Your Previous Company Name">
             </div>
             <div class="mb-3">
                 <label for="designation" class="form-label">Designation <span class="text-danger">*</span></label>
                 <input type="text" class="form-control w-25" id="designation" name="designation"
-                    placeholder="Enter Your Designation">
+                    value="{{ old('designation') }}" placeholder="Enter Your Designation">
+                @error('designation')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="experience" name="experience"
-                    placeholder="Enter Your Years of Experience">
+                    value="{{ old('experience') }}" placeholder="Enter Your Years of Experience">
             </div>
             <div class="mb-3">
                 <label for="current_Salary" class="form-label">Current Salary <span
                         class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="current_Salary" name="current_salary"
-                    placeholder="Enter Your Current Salary">
+                    value="{{ old('current_Salary') }}" placeholder="Enter Your Current Salary">
             </div>
         </fieldset>
     </form>
@@ -217,40 +236,40 @@
             errorPlacement: function errorPlacement(error, element) {
                 element.after(error);
             },
-            rules: {
-                name: "required",
-                age: "required",
-                mobile: "required",
-                nid: "required",
-                address: "required",
-                ssc_gpa: "required",
-                ssc_year: "required",
-                hsc_gpa: "required",
-                hsc_year: "required",
-                bsc_cgpa: "required",
-                bsc_year: "required",
-                previous_company_name: "required",
-                designation: "required",
-                experience: "required",
-                current_salary: "required",
-            },
-            messages: {
-                name: "Please enter your name",
-                age: "Please enter your age",
-                mobile: "Please enter your mobile number",
-                nid: "Please enter your NID number",
-                address: "Please enter your address",
-                ssc_gpa: "Please enter your SSC GPA",
-                ssc_year: "Please enter your SSC passing year",
-                hsc_gpa: "Please enter your HSC GPA",
-                hsc_year: "Please enter your HSC passing year",
-                bsc_cgpa: "Please enter your B.SC CGPA",
-                bsc_year: "Please enter your B.SC passing year",
-                previous_company_name: "Please enter your previous company name",
-                designation: "Please enter your designation",
-                experience: "Please enter your years of experience",
-                current_salary: "Please enter your current salary",
-            },
+            // rules: {
+            //     name: "required",
+            //     age: "required",
+            //     mobile: "required",
+            //     nid: "required",
+            //     address: "required",
+            //     ssc_gpa: "required",
+            //     ssc_year: "required",
+            //     hsc_gpa: "required",
+            //     hsc_year: "required",
+            //     bsc_cgpa: "required",
+            //     bsc_year: "required",
+            //     previous_company_name: "required",
+            //     designation: "required",
+            //     experience: "required",
+            //     current_salary: "required",
+            // },
+            // messages: {
+            //     name: "Please enter your name",
+            //     age: "Please enter your age",
+            //     mobile: "Please enter your mobile number",
+            //     nid: "Please enter your NID number",
+            //     address: "Please enter your address",
+            //     ssc_gpa: "Please enter your SSC GPA",
+            //     ssc_year: "Please enter your SSC passing year",
+            //     hsc_gpa: "Please enter your HSC GPA",
+            //     hsc_year: "Please enter your HSC passing year",
+            //     bsc_cgpa: "Please enter your B.SC CGPA",
+            //     bsc_year: "Please enter your B.SC passing year",
+            //     previous_company_name: "Please enter your previous company name",
+            //     designation: "Please enter your designation",
+            //     experience: "Please enter your years of experience",
+            //     current_salary: "Please enter your current salary",
+            // },
         });
     </script>
 
