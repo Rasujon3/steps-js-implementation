@@ -119,11 +119,17 @@
                     },
                     {
                         data: 'msc_cgpa',
-                        name: 'msc_cgpa'
+                        name: 'msc_cgpa',
+                        render: function(data, type, row) {
+                            return data ? data : 'N/A';
+                        }
                     },
                     {
                         data: 'msc_year',
-                        name: 'msc_year'
+                        name: 'msc_year',
+                        render: function(data, type, row) {
+                            return data ? data : 'N/A';
+                        }
                     },
                     {
                         data: 'previous_company_name',

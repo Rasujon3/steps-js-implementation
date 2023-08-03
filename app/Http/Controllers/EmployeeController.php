@@ -67,7 +67,7 @@ class EmployeeController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . route('employee.edit', ($row->id)) . ' " class="edit btn btn-success btn-sm">Edit</a>
+                    $actionBtn = '<a href="' . route('employee.edit', ($row->id)) . ' " class="edit btn btn-success btn-sm">Edit</a> </br>
                                   <a href="' . route('employee.delete', ($row->id)) . ' "  class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
@@ -118,8 +118,8 @@ class EmployeeController extends Controller
             'msc_year' => 'nullable|numeric',
             'previous_company_name' => 'required|string',
             'designation' => 'required|string',
-            'experience' => 'required|decimal:0,2',
-            'current_salary' => 'required|decimal:0,2',
+            'experience' => 'required|string',
+            'current_salary' => 'required|string',
         ]);
         // Custom validation
         $designation = $req->get('designation');
