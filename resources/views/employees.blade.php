@@ -24,24 +24,24 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>name</th>
-                        <th>age</th>
-                        <th>mobile</th>
-                        <th>nid</th>
-                        <th>address</th>
-                        <th>gender</th>
-                        <th>ssc_gpa</th>
-                        <th>ssc_year</th>
-                        <th>hsc_gpa</th>
-                        <th>hsc_year</th>
-                        <th>bsc_cgpa</th>
-                        <th>bsc_year</th>
-                        <th>msc_cgpa</th>
-                        <th>msc_year</th>
-                        <th>previous_company_name</th>
-                        <th>designation</th>
-                        <th>experience</th>
-                        <th>current_salary</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Mobile</th>
+                        <th>NOD</th>
+                        <th>Address</th>
+                        <th>Gender</th>
+                        <th>SSC GPR</th>
+                        <th>SSC Year</th>
+                        <th>HSC GPA</th>
+                        <th>HSC Year</th>
+                        <th>B.Sc CGPA</th>
+                        <th>B.Sc Year</th>
+                        <th>M.Sc CGPA</th>
+                        <th>M.Sc Year</th>
+                        <th>Previous Company Name</th>
+                        <th>Designation</th>
+                        <th>Experience</th>
+                        <th>Current Salary</th>
                         <th width="505px">Action</th>
                     </tr>
                 </thead>
