@@ -23,6 +23,9 @@
 </head>
 
 <body>
+    <a href="/employees">
+        <h1 class="btn btn-secondary text-center w-100">Show Employees</h1>
+    </a>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

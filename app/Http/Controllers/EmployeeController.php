@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use DB;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -44,7 +45,9 @@ class EmployeeController extends Controller
             return redirect()->back()->with('error', 'Integer number is not allowed for name, designation & previous company name.');
         }
 
-        $insert = DB::table('employee')->insert($data);
+        // $insert = DB::table('employee')->insert($data);
+        // __Using ORM __
+        $insert = Employee::create($data);
         if ($insert) {
             return redirect('/employees');
         } else {
@@ -54,8 +57,10 @@ class EmployeeController extends Controller
     }
     public function ShowEmployee(Request $request)
     {
-        $data = DB::table('employee')->select()->get();
+        // $data = DB::table('employee')->select()->get();
         // dd($data);
+        // __ Using Eloquent ORM __
+        $data = Employee::get();
 
         if ($request->ajax()) {
             // dd($request->ajax());
@@ -74,17 +79,22 @@ class EmployeeController extends Controller
     public function DeleteEmployee($id)
     {
         $delete = DB::table('employee')->where('id', $id)->delete();
-        if ($delete) {
+        // __Using ORM __
+        $employee = Employee::find($id);
+        if ($employee) {
+            $employee->delete();
             return redirect('/employees');
         } else {
-            return 'Data delete failed';
+            return redirect()->back()->with('message', 'Data delete failed');
 
         }
     }
 
     public function EditEmployee($id)
     {
-        $employee = DB::table('employee')->where('id', $id)->first();
+        // $employee = DB::table('employee')->where('id', $id)->first();
+        // __Using ORM __
+        $employee = Employee::find($id);
         return view('edit', compact('employee'));
 
     }
@@ -120,7 +130,9 @@ class EmployeeController extends Controller
             return redirect()->back()->with('error', 'Integer number is not allowed for name, designation & previous company name.');
         }
 
-        $update = DB::table('employee')->where('id', $id)->update($data);
+        // $update = DB::table('employee')->where('id', $id)->update($data);
+        // __Using ORM __
+        $update = Employee::find($id)->update($data);
         if ($update) {
             return redirect('/employees');
         } else {
