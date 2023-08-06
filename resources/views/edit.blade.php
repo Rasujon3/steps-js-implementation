@@ -23,7 +23,8 @@
 </head>
 
 <body>
-    <form id="example-advanced-form" action="{{ url('/update/' . $employee->id) }}" class="form-control" method="post">
+    <form id="example-advanced-form" action="{{ url('/update/' . $employee->emp_id) }}" class="form-control"
+        method="post">
         @csrf
         <h3>Personal Information</h3>
         <fieldset>
