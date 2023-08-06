@@ -8,7 +8,7 @@ use App\Models\EmployeePersonalInformation;
 use App\Models\EmployeeProfessionalInformation;
 use DB;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Facades\Datatables;
 
 class EmployeeController extends Controller
 {
@@ -98,8 +98,12 @@ class EmployeeController extends Controller
         // $data = DB::table('employee')->select()->get();
         // dd($data);
         // __ Using Eloquent ORM __
-        $data = Employee::get();
-
+        // $data = Employee::get();
+        $data = DB::table('employee_personal_information')
+            ->join('employee_educational_qualifications', 'employee_personal_information.id', '=', 'employee_educational_qualifications.emp_id')
+            ->join('employee_professional_information', 'employee_personal_information.id', '=', 'employee_professional_information.employees_id')
+            ->get();
+        // dd($data);
         if ($request->ajax()) {
             // dd($request->ajax());
             return Datatables::of($data)
