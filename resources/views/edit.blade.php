@@ -23,9 +23,35 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
     <form id="example-advanced-form" action="{{ url('/update/' . $employee->emp_id) }}" class="form-control"
         method="post">
         @csrf
+        @method('PUT')
         <h3>Personal Information</h3>
         <fieldset>
             <legend>Personal Information</legend>

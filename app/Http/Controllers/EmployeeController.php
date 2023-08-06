@@ -61,6 +61,7 @@ class EmployeeController extends Controller
                 // dd($eduInfo);
                 // return $eduInfo;
             }
+
             // dd($eduInfo);
             if ($personalInfo && $eduInfo) {
                 $professional_info_data = $req->validate([
@@ -78,8 +79,8 @@ class EmployeeController extends Controller
             return redirect('/employees')->with('success', 'Data inserted successfully.');
         } catch (\Exception $e) {
             DB::rollback(); // If any insert fails, rollback the transaction
-            dd($e->getMessage(), $e->getFile(), $e->getLine());
-            return redirect()->back()->with('error', 'Data insert failed. Please try again.');
+            // dd($e->getMessage(), $e->getFile(), $e->getLine());
+            return redirect()->back()->with('error', 'Data insert failed. Please try again.')->withInput();
         }
 
         // $insert = DB::table('employee')->insert($data);
@@ -114,8 +115,12 @@ class EmployeeController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . route('employee.edit', ($row->emp_id)) . ' " class="edit btn btn-success btn-sm">Edit</a> </br>
-                                  <a href="' . route('employee.delete', ($row->emp_id)) . ' "  class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="' . route('employee.edit', $row->emp_id) . '" class="edit btn btn-success btn-sm">Edit</a> </br>
+                    <form action="' . route('employee.delete', $row->emp_id) . '" method="POST">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
+                    </form>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -152,9 +157,9 @@ class EmployeeController extends Controller
 
             // Delete the employee's personal information
             $data->delete();
-            return redirect('/employees');
+            return redirect('/employees')->with('success', 'Data deleted successfully.');
         } else {
-            return redirect()->back()->with('message', 'Data delete failed');
+            return redirect()->back()->with('error', 'Data delete failed');
 
         }
     }
@@ -236,11 +241,11 @@ class EmployeeController extends Controller
             }
 
             DB::commit(); // // If all inserts succeed, commit the transaction
-            return redirect('/employees')->with('success', 'Data inserted successfully.');
+            return redirect('/employees')->with('success', 'Data updated successfully.');
         } catch (\Exception $e) {
             DB::rollback(); // If any insert fails, rollback the transaction
-            dd($e->getMessage(), $e->getFile(), $e->getLine());
-            return redirect()->back()->with('error', 'Data insert failed. Please try again.');
+            // dd($e->getMessage(), $e->getFile(), $e->getLine());
+            return redirect()->back()->with('error', 'Data update failed. Please try again.');
         }
 
     }

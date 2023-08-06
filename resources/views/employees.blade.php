@@ -15,7 +15,33 @@
 <body>
     <div class="container">
         <h2 class="mb-5 text-center">Employees</h2>
+        <div class="container">
+            <div class="row">
+                <div class="text-center w-100">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
         <div class="d-flex justify-content-center">
+
             <a href="/" class="btn btn-warning items-center">Back Home</a>
         </div>
         <div class="table-responsive">
