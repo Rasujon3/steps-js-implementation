@@ -55,10 +55,12 @@ class EmployeeController extends Controller
                 ]);
 
                 // Insert into EmployeeEducationalQualification
-                $eduInfo = EmployeeEducationalQualification::create($edu_info_data);
-                dd($eduInfo);
-                return $eduInfo;
+
+                $eduInfo = EmployeeEducationalQualification::create($edu_info_data + ['emp_id' => $personalInfo->id]);
+                // dd($eduInfo);
+                // return $eduInfo;
             }
+            // dd($eduInfo);
             if ($personalInfo && $eduInfo) {
                 $professional_info_data = $req->validate([
 
@@ -68,13 +70,14 @@ class EmployeeController extends Controller
                     'current_salary' => 'required|decimal:0,2',
                 ]);
                 // Insert into EmployeeProfessionalInformation
-                $professionalInfo = EmployeeProfessionalInformation::create($professional_info_data);
+                $professionalInfo = EmployeeProfessionalInformation::create($professional_info_data + ['employees_id' => $personalInfo->id]);
             }
 
-            DB::commit(); // If all inserts succeed, commit the transaction
+            DB::commit(); // // If all inserts succeed, commit the transaction
             return redirect('/employees')->with('success', 'Data inserted successfully.');
         } catch (\Exception $e) {
             DB::rollback(); // If any insert fails, rollback the transaction
+            dd($e->getMessage(), $e->getFile(), $e->getLine());
             return redirect()->back()->with('error', 'Data insert failed. Please try again.');
         }
 

@@ -15,7 +15,7 @@ class EmployeeEducationalQualification extends Model
     public $timestamps = false;
 
     protected $fillable = [
-
+        'emp_id',
         'ssc_gpa',
         'ssc_year',
         'hsc_gpa',

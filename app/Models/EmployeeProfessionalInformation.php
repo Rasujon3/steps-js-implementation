@@ -15,6 +15,7 @@ class EmployeeProfessionalInformation extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'employees_id',
         'previous_company_name',
         'designation',
         'experience',
