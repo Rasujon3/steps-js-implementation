@@ -162,7 +162,14 @@ class EmployeeController extends Controller
     {
         // $employee = DB::table('employee')->where('id', $id)->first();
         // __Using ORM __
-        $employee = Employee::find($id);
+        // $employee = Employee::find($id);
+        $employeeArray = DB::table('employee_personal_information')
+            ->join('employee_educational_qualifications', 'employee_personal_information.id', '=', 'employee_educational_qualifications.emp_id')
+            ->join('employee_professional_information', 'employee_personal_information.id', '=', 'employee_professional_information.employees_id')
+            ->where('employee_personal_information.id', '=', $id)
+            ->get();
+        $employee = $employeeArray[0];
+        // dd($employee[0]);
         return view('edit', compact('employee'));
 
     }
