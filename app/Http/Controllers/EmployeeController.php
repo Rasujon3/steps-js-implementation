@@ -103,14 +103,18 @@ class EmployeeController extends Controller
             ->join('employee_educational_qualifications', 'employee_personal_information.id', '=', 'employee_educational_qualifications.emp_id')
             ->join('employee_professional_information', 'employee_personal_information.id', '=', 'employee_professional_information.employees_id')
             ->get();
+        // $data = DB::table('EmployeePersonalInformation')
+        //     ->join('EmployeeEducationalQualification', 'EmployeePersonalInformation.id', '=', 'EmployeeEducationalQualification.emp_id')
+        //     ->join('EmployeeProfessionalInformation', 'EmployeePersonalInformation.id', '=', 'EmployeeProfessionalInformation.employees_id')
+        //     ->get();
         // dd($data);
         if ($request->ajax()) {
             // dd($request->ajax());
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . route('employee.edit', ($row->id)) . ' " class="edit btn btn-success btn-sm">Edit</a> </br>
-                                  <a href="' . route('employee.delete', ($row->id)) . ' "  class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="' . route('employee.edit', ($row->emp_id)) . ' " class="edit btn btn-success btn-sm">Edit</a> </br>
+                                  <a href="' . route('employee.delete', ($row->emp_id)) . ' "  class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -120,11 +124,33 @@ class EmployeeController extends Controller
     }
     public function DeleteEmployee($id)
     {
-        $delete = DB::table('employee')->where('id', $id)->delete();
+        // __ Query Builder __ //
+        // $delete = DB::table('employee')->where('id', $id)->delete();
         // __Using ORM __
-        $employee = Employee::find($id);
-        if ($employee) {
-            $employee->delete();
+        $data = EmployeePersonalInformation::find($id);
+        // $employeeID = "employee_personal_information.id";
+        // dd($employeeID);
+
+        // $data = DB::table('employee_personal_information')
+        //     ->join('employee_educational_qualifications', 'employee_personal_information.id', '=', 'employee_educational_qualifications.emp_id')
+        //     ->join('employee_professional_information', 'employee_personal_information.id', '=', 'employee_professional_information.employees_id')
+        //     ->get()
+        //     ->where($id = 'employee_personal_information.id');
+        if ($data) {
+            // Delete related records from other tables
+            // $employee->educationalQualifications()->delete()->where($id = 'employee_educational_qualifications.emp_id');
+            // $employee->professionalInformation()->delete()->where($id = 'employee_professional_information.employees_id');
+            // Delete related records from other tables conditionally
+            $data->educationalQualifications()
+                ->where('emp_id', $id)
+                ->delete();
+
+            $data->professionalInformation()
+                ->where('employees_id', $id)
+                ->delete();
+
+            // Delete the employee's personal information
+            $data->delete();
             return redirect('/employees');
         } else {
             return redirect()->back()->with('message', 'Data delete failed');

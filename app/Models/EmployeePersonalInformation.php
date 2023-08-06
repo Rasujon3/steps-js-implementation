@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\EmployeeEducationalQualification;
+use App\Models\EmployeeProfessionalInformation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,4 +25,13 @@ class EmployeePersonalInformation extends Model
         'gender',
 
     ];
+
+    public function educationalQualifications()
+    {
+        return $this->hasOne(EmployeeEducationalQualification::class, 'emp_id', 'id');
+    }
+    public function professionalInformation()
+    {
+        return $this->hasOne(EmployeeProfessionalInformation::class, 'employees_id', 'id');
+    }
 }
