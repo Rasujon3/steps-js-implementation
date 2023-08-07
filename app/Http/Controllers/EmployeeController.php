@@ -81,6 +81,7 @@ class EmployeeController extends Controller
             DB::rollback(); // If any insert fails, rollback the transaction
             // dd($e->getMessage(), $e->getFile(), $e->getLine());
             return redirect()->back()->with('error', 'Data insert failed. Please try again.')->withInput();
+            // return redirect()->back()->with($errors)->withInput();
         }
 
         // $insert = DB::table('employee')->insert($data);

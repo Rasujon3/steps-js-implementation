@@ -35,6 +35,7 @@
                         </ul>
                     </div>
                 @endif
+                {{-- {{ dd($errors) }} --}}
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -62,25 +63,42 @@
                 <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control w-25" id="name" name="name"
                     value="{{ old('name') }}" placeholder="Enter Your Name">
+                {{ $errors->has('name') ? 'is-invalid' : '' }}
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
+
             <div class="mb-3">
                 <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="age" name="age"
                     value="{{ old('age') }}" placeholder="Enter Your Age">
+                @error('age')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="mobile" name="mobile"
                     value="{{ old('mobile') }}" placeholder="Enter Your Mobile Number">
+                @error('mobile')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="nid" class="form-label">NID <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="nid" name="nid"
                     value="{{ old('nid') }}" placeholder="Enter Your NID Number">
+                @error('nid')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
                 <textarea type="text" class="form-control w-25" id="address" name="address" placeholder="Enter Your Address">{{ old('address') }}</textarea>
+                @error('address')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender <span class="text-danger me-2">*</span></label>
@@ -96,6 +114,9 @@
                     <input class="form-check-input" type="radio" name="gender" id="others" value="others">
                     <label class="form-check-label" for="others">Others</label>
                 </div>
+                @error('gender')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
         </fieldset>
@@ -111,10 +132,16 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="ssc_gpa" name="ssc_gpa"
                                 value="{{ old('ssc_gpa') }}" placeholder="Enter Your GPA">
+                            @error('ssc_gpa')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="ssc_year" name="ssc_year"
                                 value="{{ old('ssc_year') }}" placeholder="Enter Your Passing Year">
+                            @error('ssc_year')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -126,10 +153,16 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="hsc_gpa" name="hsc_gpa"
                                 value="{{ old('hsc_gpa') }}" placeholder="Enter Your GPA">
+                            @error('hsc_gpa')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="hsc_year" name="hsc_year"
                                 value="{{ old('hsc_year') }}" placeholder="Enter Your Passing Year">
+                            @error('hsc_year')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -141,10 +174,16 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="bsc_cgpa" name="bsc_cgpa"
                                 value="{{ old('bsc_cgpa') }}" placeholder="Enter Your CGPA">
+                            @error('bsc_cgpa')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="bsc_year" name="bsc_year"
                                 value="{{ old('bsc_year') }}" placeholder="Enter Your Passing Year">
+                            @error('bsc_year')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -156,10 +195,16 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="msc_cgpa" name="msc_cgpa"
                                 value="{{ old('msc_cgpa') }}" placeholder="Enter Your CGPA">
+                            @error('msc_cgpa')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="msc_year" name="msc_year"
                                 value="{{ old('msc_year') }}" placeholder="Enter Your Passing Year">
+                            @error('msc_year')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -176,6 +221,9 @@
                 <input type="text" class="form-control w-25" id="previous_company_name"
                     name="previous_company_name" value="{{ old('previous_company_name') }}"
                     placeholder="Enter Your Previous Company Name">
+                @error('previous_company_name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="designation" class="form-label">Designation <span class="text-danger">*</span></label>
@@ -189,12 +237,18 @@
                 <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="experience" name="experience"
                     value="{{ old('experience') }}" placeholder="Enter Your Years of Experience">
+                @error('experience')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="current_Salary" class="form-label">Current Salary <span
                         class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="current_Salary" name="current_salary"
                     value="{{ old('current_Salary') }}" placeholder="Enter Your Current Salary">
+                @error('current_salary')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </fieldset>
     </form>

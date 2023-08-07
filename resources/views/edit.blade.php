@@ -60,25 +60,40 @@
                 <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control w-25" id="name" name="name"
                     value="{{ $employee->name }}" placeholder="Enter Your Name">
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="age" name="age"
                     value="{{ $employee->age }}" placeholder="Enter Your Age">
+                @error('age')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="mobile" name="mobile"
                     value="{{ $employee->mobile }}" placeholder="Enter Your Mobile Number">
+                @error('mobile')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="nid" class="form-label">NID <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="nid" name="nid"
                     value="{{ $employee->nid }}" placeholder="Enter Your NID Number">
+                @error('nid')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
                 <textarea type="text" class="form-control w-25" id="address" name="address" placeholder="Enter Your Address">{{ $employee->address }}</textarea>
+                @error('address')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender <span class="text-danger me-2">*</span></label>
@@ -97,6 +112,9 @@
                         @if ($employee->gender == 'others') @checked(true) @endif>
                     <label class="form-check-label" for="others">Others</label>
                 </div>
+                @error('gender')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
         </fieldset>
@@ -112,10 +130,16 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="ssc_gpa" name="ssc_gpa"
                                 value="{{ $employee->ssc_gpa }}" placeholder="Enter Your GPA">
+                            @error('ssc_gpa')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="ssc_year" name="ssc_year"
                                 value="{{ $employee->ssc_year }}" placeholder="Enter Your Passing Year">
+                            @error('ssc_year')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -127,10 +151,16 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="hsc_gpa" name="hsc_gpa"
                                 value="{{ $employee->hsc_gpa }}" placeholder="Enter Your GPA">
+                            @error('hsc_gpa')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="hsc_year" name="hsc_year"
                                 value="{{ $employee->hsc_year }}" placeholder="Enter Your Passing Year">
+                            @error('hsc_year')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -142,10 +172,16 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="bsc_cgpa" name="bsc_cgpa"
                                 value="{{ $employee->bsc_cgpa }}" placeholder="Enter Your CGPA">
+                            @error('bsc_cgpa')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="bsc_year" name="bsc_year"
                                 value="{{ $employee->bsc_year }}" placeholder="Enter Your Passing Year">
+                            @error('bsc_year')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -157,10 +193,16 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="msc_cgpa" name="msc_cgpa"
                                 value="{{ $employee->msc_cgpa }}" placeholder="Enter Your CGPA">
+                            @error('msc_cgpa')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="number" class="form-control" id="msc_year" name="msc_year"
                                 value="{{ $employee->msc_year }}" placeholder="Enter Your Passing Year">
+                            @error('msc_year')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -177,22 +219,34 @@
                 <input type="text" class="form-control w-25" id="previous_company_name"
                     name="previous_company_name" value="{{ $employee->previous_company_name }}"
                     placeholder="Enter Your Previous Company Name">
+                @error('previous_company_name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="designation" class="form-label">Designation <span class="text-danger">*</span></label>
                 <input type="text" class="form-control w-25" id="designation" name="designation"
                     value="{{ $employee->designation }}" placeholder="Enter Your Designation">
+                @error('designation')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="experience" name="experience"
                     value="{{ $employee->experience }}" placeholder="Enter Your Years of Experience">
+                @error('experience')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="current_Salary" class="form-label">Current Salary <span
                         class="text-danger">*</span></label>
                 <input type="number" class="form-control w-25" id="current_Salary" name="current_salary"
                     value="{{ $employee->current_salary }}" placeholder="Enter Your Current Salary">
+                @error('current_salary')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </fieldset>
     </form>
@@ -206,83 +260,84 @@
         var form = $("#example-advanced-form").show();
 
         form.steps({
-            headerTag: "h3",
-            bodyTag: "fieldset",
-            transitionEffect: "slideLeft",
-            onStepChanging: function(event, currentIndex, newIndex) {
-                // Allways allow previous action even if the current form is not valid!
-                if (currentIndex > newIndex) {
-                    return true;
+                headerTag: "h3",
+                bodyTag: "fieldset",
+                transitionEffect: "slideLeft",
+                onStepChanging: function(event, currentIndex, newIndex) {
+                    // Allways allow previous action even if the current form is not valid!
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+                    // Forbid next action on "Warning" step if the user is to young
+                    if (newIndex === 3 && ($("#age").val()) == "") {
+                        return false;
+                    }
+                    // Forbid next action on "Warning" step if the user is to young
+                    if (newIndex === 1 && Number($("#age-2").val()) < 18) {
+                        return false;
+                    }
+                    // Needed in some cases if the user went back (clean up)
+                    if (currentIndex < newIndex) {
+                        // To remove error styles
+                        form.find(".body:eq(" + newIndex + ") label.error").remove();
+                        form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+                    }
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                },
+                onStepChanged: function(event, currentIndex, priorIndex) {
+                    // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
+                    if (currentIndex === 2 && priorIndex === 3) {
+                        form.steps("previous");
+                    }
+                },
+                onFinishing: function(event, currentIndex) {
+                    form.validate().settings.ignore = ":disabled";
+                    return form.valid();
+                },
+                onFinished: function(event, currentIndex) {
+                    form.submit();
                 }
-                // Forbid next action on "Warning" step if the user is to young
-                if (newIndex === 3 && ($("#age").val()) == "") {
-                    return false;
-                }
-                // Forbid next action on "Warning" step if the user is to young
-                if (newIndex === 1 && Number($("#age-2").val()) < 18) {
-                    return false;
-                }
-                // Needed in some cases if the user went back (clean up)
-                if (currentIndex < newIndex) {
-                    // To remove error styles
-                    form.find(".body:eq(" + newIndex + ") label.error").remove();
-                    form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
-                }
-                form.validate().settings.ignore = ":disabled,:hidden";
-                return form.valid();
-            },
-            onStepChanged: function(event, currentIndex, priorIndex) {
-                // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-                if (currentIndex === 2 && priorIndex === 3) {
-                    form.steps("previous");
-                }
-            },
-            onFinishing: function(event, currentIndex) {
-                form.validate().settings.ignore = ":disabled";
-                return form.valid();
-            },
-            onFinished: function(event, currentIndex) {
-                form.submit();
-            }
-        }).validate({
-            errorPlacement: function errorPlacement(error, element) {
-                element.after(error);
-            },
-            rules: {
-                name: "required",
-                age: "required",
-                mobile: "required",
-                nid: "required",
-                address: "required",
-                ssc_gpa: "required",
-                ssc_year: "required",
-                hsc_gpa: "required",
-                hsc_year: "required",
-                bsc_cgpa: "required",
-                bsc_year: "required",
-                previous_company_name: "required",
-                designation: "required",
-                experience: "required",
-                current_salary: "required",
-            },
-            messages: {
-                name: "Please enter your name",
-                age: "Please enter your age",
-                mobile: "Please enter your mobile number",
-                nid: "Please enter your NID number",
-                address: "Please enter your address",
-                ssc_gpa: "Please enter your SSC GPA",
-                ssc_year: "Please enter your SSC passing year",
-                hsc_gpa: "Please enter your HSC GPA",
-                hsc_year: "Please enter your HSC passing year",
-                bsc_cgpa: "Please enter your B.SC CGPA",
-                bsc_year: "Please enter your B.SC passing year",
-                previous_company_name: "Please enter your previous company name",
-                designation: "Please enter your designation",
-                experience: "Please enter your years of experience",
-                current_salary: "Please enter your current salary",
-            },
-        });
+            })
+            .validate({
+                errorPlacement: function errorPlacement(error, element) {
+                    element.after(error);
+                },
+                // rules: {
+                //     name: "required",
+                //     age: "required",
+                //     mobile: "required",
+                //     nid: "required",
+                //     address: "required",
+                //     ssc_gpa: "required",
+                //     ssc_year: "required",
+                //     hsc_gpa: "required",
+                //     hsc_year: "required",
+                //     bsc_cgpa: "required",
+                //     bsc_year: "required",
+                //     previous_company_name: "required",
+                //     designation: "required",
+                //     experience: "required",
+                //     current_salary: "required",
+                // },
+                // messages: {
+                //     name: "Please enter your name",
+                //     age: "Please enter your age",
+                //     mobile: "Please enter your mobile number",
+                //     nid: "Please enter your NID number",
+                //     address: "Please enter your address",
+                //     ssc_gpa: "Please enter your SSC GPA",
+                //     ssc_year: "Please enter your SSC passing year",
+                //     hsc_gpa: "Please enter your HSC GPA",
+                //     hsc_year: "Please enter your HSC passing year",
+                //     bsc_cgpa: "Please enter your B.SC CGPA",
+                //     bsc_year: "Please enter your B.SC passing year",
+                //     previous_company_name: "Please enter your previous company name",
+                //     designation: "Please enter your designation",
+                //     experience: "Please enter your years of experience",
+                //     current_salary: "Please enter your current salary",
+                // },
+            });
     </script>
 
 </body>
