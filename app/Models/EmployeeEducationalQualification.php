@@ -26,4 +26,8 @@ class EmployeeEducationalQualification extends Model
         'msc_year',
 
     ];
+    public function personalInformation()
+    {
+        return $this->belongsTo('App\Models\EmployeePersonalInformation', 'emp_id');
+    }
 }

@@ -100,24 +100,87 @@ class EmployeeController extends Controller
     {
         // $data = DB::table('employee')->select()->get();
         // dd($data);
-        // __ Using Eloquent ORM __
-        // $data = Employee::get();
-        $data = DB::table('employee_personal_information')
-            ->join('employee_educational_qualifications', 'employee_personal_information.id', '=', 'employee_educational_qualifications.emp_id')
-            ->join('employee_professional_information', 'employee_personal_information.id', '=', 'employee_professional_information.employees_id')
-            ->get();
-        // $data = DB::table('EmployeePersonalInformation')
-        //     ->join('EmployeeEducationalQualification', 'EmployeePersonalInformation.id', '=', 'EmployeeEducationalQualification.emp_id')
-        //     ->join('EmployeeProfessionalInformation', 'EmployeePersonalInformation.id', '=', 'EmployeeProfessionalInformation.employees_id')
+        // $data = DB::table('employee_personal_information')
+        //     ->join('employee_educational_qualifications', 'employee_personal_information.id', '=', 'employee_educational_qualifications.emp_id')
+        //     ->join('employee_professional_information', 'employee_personal_information.id', '=', 'employee_professional_information.employees_id')
         //     ->get();
         // dd($data);
+        /* ********************************************************** */
+
+        // __ Using Eloquent ORM __
+
+        // $data = EmployeePersonalInformation::with('educationalQualifications')->with("professionalInformation")->get()->toArray();
+        // dd($data[0]->id);
+
+        // $data = EmployeePersonalInformation::with('educationalQualifications', 'professionalInformation')->get();
+        // $firstRecordId = $data[0]->id;
+
+        // dd($data);
+
+        // $data = EmployeePersonalInformation::with('educationalQualifications', 'professionalInformation')->get()->toArray();
+        // dd($data);
+
+        $data = EmployeePersonalInformation::with('educationalQualifications', 'professionalInformation')
+            ->get();
+
+        $formattedData = collect($data)->map(function ($item) {
+            // Extract educationalQualifications values
+            $educationalQualificationsData = [];
+            foreach ($item->educationalQualifications as $qualification) {
+                // dd($item->educationalQualifications);
+                // dd($qualification);
+                $educationalQualificationsData['ssc_gpa'] = $item->educationalQualifications->ssc_gpa;
+                $educationalQualificationsData['ssc_year'] = $item->educationalQualifications->ssc_year;
+                $educationalQualificationsData['hsc_gpa'] = $item->educationalQualifications->hsc_gpa;
+                $educationalQualificationsData['hsc_year'] = $item->educationalQualifications->hsc_year;
+                $educationalQualificationsData['bsc_cgpa'] = $item->educationalQualifications->bsc_cgpa;
+                $educationalQualificationsData['bsc_year'] = $item->educationalQualifications->bsc_year;
+                $educationalQualificationsData['msc_cgpa'] = $item->educationalQualifications->msc_cgpa;
+                $educationalQualificationsData['msc_year'] = $item->educationalQualifications->msc_year;
+                // dd($educationalQualificationsData);
+            }
+
+            // Extract professionalInformation values
+            $professionalInformationData = [];
+            foreach ($item->professionalInformation as $information) {
+                // dd($item->professionalInformation);
+                $professionalInformationData['previous_company_name'] = $item->professionalInformation->previous_company_name;
+                $professionalInformationData['designation'] = $item->professionalInformation->designation;
+                $professionalInformationData['experience'] = $item->professionalInformation->experience;
+                $professionalInformationData['current_salary'] = $item->professionalInformation->current_salary;
+                // dd($professionalInformationData);
+            }
+            return (object) [
+                'id' => $item->id,
+                'name' => $item->name,
+                'age' => $item->age,
+                'mobile' => $item->mobile,
+                'nid' => $item->nid,
+                'address' => $item->address,
+                'gender' => $item->gender,
+                'ssc_gpa' => $educationalQualificationsData['ssc_gpa'],
+                'ssc_year' => $educationalQualificationsData['ssc_year'],
+                'hsc_gpa' => $educationalQualificationsData['hsc_gpa'],
+                'hsc_year' => $educationalQualificationsData['hsc_year'],
+                'bsc_cgpa' => $educationalQualificationsData['bsc_cgpa'],
+                'bsc_year' => $educationalQualificationsData['bsc_year'],
+                'msc_cgpa' => $educationalQualificationsData['msc_cgpa'],
+                'msc_year' => $educationalQualificationsData['msc_year'],
+                'previous_company_name' => $professionalInformationData['previous_company_name'],
+                'designation' => $professionalInformationData['designation'],
+                'experience' => $professionalInformationData['experience'],
+                'current_salary' => $professionalInformationData['current_salary'],
+                // Add other properties as needed
+            ];
+        });
+        // dd($formattedData);
         if ($request->ajax()) {
-            // dd($request->ajax());
-            return Datatables::of($data)
+            return Datatables::of($formattedData)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . route('employee.edit', $row->emp_id) . '" class="edit btn btn-success btn-sm">Edit</a> </br>
-                    <form action="' . route('employee.delete', $row->emp_id) . '" method="POST">
+                    // dd($row);
+                    $actionBtn = '<a href="' . route('employee.edit', $row->id) . '" class="edit btn btn-success btn-sm">Edit</a> </br>
+                    <form action="' . route('employee.delete', $row->id) . '" method="POST">
                         ' . csrf_field() . '
                         ' . method_field('DELETE') . '
                         <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
@@ -131,23 +194,12 @@ class EmployeeController extends Controller
     }
     public function DeleteEmployee($id)
     {
-        // __ Query Builder __ //
-        // $delete = DB::table('employee')->where('id', $id)->delete();
+
         // __Using ORM __
         $data = EmployeePersonalInformation::find($id);
-        // $employeeID = "employee_personal_information.id";
-        // dd($employeeID);
 
-        // $data = DB::table('employee_personal_information')
-        //     ->join('employee_educational_qualifications', 'employee_personal_information.id', '=', 'employee_educational_qualifications.emp_id')
-        //     ->join('employee_professional_information', 'employee_personal_information.id', '=', 'employee_professional_information.employees_id')
-        //     ->get()
-        //     ->where($id = 'employee_personal_information.id');
         if ($data) {
-            // Delete related records from other tables
-            // $employee->educationalQualifications()->delete()->where($id = 'employee_educational_qualifications.emp_id');
-            // $employee->professionalInformation()->delete()->where($id = 'employee_professional_information.employees_id');
-            // Delete related records from other tables conditionally
+
             $data->educationalQualifications()
                 ->where('emp_id', $id)
                 ->delete();

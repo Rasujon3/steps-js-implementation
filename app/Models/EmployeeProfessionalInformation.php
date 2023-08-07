@@ -21,4 +21,8 @@ class EmployeeProfessionalInformation extends Model
         'experience',
         'current_salary',
     ];
+    public function personalInformation()
+    {
+        return $this->belongsTo('App\Models\EmployeePersonalInformation', 'employees_id');
+    }
 }
