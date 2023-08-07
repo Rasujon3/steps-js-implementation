@@ -183,36 +183,43 @@ class EmployeeController extends Controller
 
     public function UpdateData($id, Request $req)
     {
+        $personal_info_data = $req->validate([
+            'name' => 'required|string',
+            'age' => 'required|numeric',
+            'mobile' => 'required|string',
+            'nid' => 'required|string',
+            'address' => 'required|string',
+            'gender' => 'required|string',
+
+        ]);
+
+        $edu_info_data = $req->validate([
+
+            'ssc_gpa' => 'required|decimal:0,2',
+            'ssc_year' => 'required|numeric',
+            'hsc_gpa' => 'required|decimal:0,2',
+            'hsc_year' => 'required|numeric',
+            'bsc_cgpa' => 'required|decimal:0,2',
+            'bsc_year' => 'required|numeric',
+            'msc_cgpa' => 'nullable|decimal:0,2',
+            'msc_year' => 'nullable|numeric',
+
+        ]);
+
+        $professional_info_data = $req->validate([
+
+            'previous_company_name' => 'required|string',
+            'designation' => 'required|string',
+            'experience' => 'required|decimal:0,2',
+            'current_salary' => 'required|decimal:0,2',
+        ]);
 
         DB::beginTransaction();
         try {
 
-            $personal_info_data = $req->validate([
-                'name' => 'required|string',
-                'age' => 'required|numeric',
-                'mobile' => 'required|string',
-                'nid' => 'required|string',
-                'address' => 'required|string',
-                'gender' => 'required|string',
-
-            ]);
-
             $personalInfoUpdate = EmployeePersonalInformation::where('id', $id)->update($personal_info_data);
             // dd($personalInfoUpdate);
             if ($personalInfoUpdate) {
-
-                $edu_info_data = $req->validate([
-
-                    'ssc_gpa' => 'required|decimal:0,2',
-                    'ssc_year' => 'required|numeric',
-                    'hsc_gpa' => 'required|decimal:0,2',
-                    'hsc_year' => 'required|numeric',
-                    'bsc_cgpa' => 'required|decimal:0,2',
-                    'bsc_year' => 'required|numeric',
-                    'msc_cgpa' => 'nullable|decimal:0,2',
-                    'msc_year' => 'nullable|numeric',
-
-                ]);
 
                 // Update into EmployeeEducationalQualification
 
@@ -226,13 +233,7 @@ class EmployeeController extends Controller
             }
             // dd($eduInfoUpdate);
             if ($personalInfoUpdate && $eduInfoUpdate) {
-                $professional_info_data = $req->validate([
 
-                    'previous_company_name' => 'required|string',
-                    'designation' => 'required|string',
-                    'experience' => 'required|decimal:0,2',
-                    'current_salary' => 'required|decimal:0,2',
-                ]);
                 // Update into EmployeeProfessionalInformation
 
                 $eduInfoUpdate = EmployeeProfessionalInformation::where('employees_id', $id)->update($professional_info_data);

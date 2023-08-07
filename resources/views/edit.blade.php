@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row">
             <div class="text-center">
-                @if ($errors->any())
+                {{-- @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -34,7 +34,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif --}}
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -58,41 +58,42 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control w-25" id="name" name="name"
-                    value="{{ $employee->name }}" placeholder="Enter Your Name">
+                <input type="text" class="form-control w-25 @error('name') is-invalid @enderror" id="name"
+                    name="name" value="{{ $employee->name }}" placeholder="Enter Your Name">
                 @error('name')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="age" name="age"
-                    value="{{ $employee->age }}" placeholder="Enter Your Age">
+                <input type="number" class="form-control w-25 @error('age') is-invalid @enderror" id="age"
+                    name="age" value="{{ $employee->age }}" placeholder="Enter Your Age">
                 @error('age')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="mobile" name="mobile"
-                    value="{{ $employee->mobile }}" placeholder="Enter Your Mobile Number">
+                <input type="number" class="form-control w-25 @error('mobile') is-invalid @enderror" id="mobile"
+                    name="mobile" value="{{ $employee->mobile }}" placeholder="Enter Your Mobile Number">
                 @error('mobile')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="nid" class="form-label">NID <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="nid" name="nid"
-                    value="{{ $employee->nid }}" placeholder="Enter Your NID Number">
+                <input type="number" class="form-control w-25 @error('nid') is-invalid @enderror" id="nid"
+                    name="nid" value="{{ $employee->nid }}" placeholder="Enter Your NID Number">
                 @error('nid')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
-                <textarea type="text" class="form-control w-25" id="address" name="address" placeholder="Enter Your Address">{{ $employee->address }}</textarea>
+                <textarea type="text" class="form-control w-25 @error('address') is-invalid @enderror" id="address" name="address"
+                    placeholder="Enter Your Address">{{ $employee->address }}</textarea>
                 @error('address')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
@@ -113,7 +114,7 @@
                     <label class="form-check-label" for="others">Others</label>
                 </div>
                 @error('gender')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -128,17 +129,19 @@
                 <div class="container">
                     <div class="row w-50">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="ssc_gpa" name="ssc_gpa"
-                                value="{{ $employee->ssc_gpa }}" placeholder="Enter Your GPA">
+                            <input type="number" class="form-control  @error('ssc_gpa') is-invalid @enderror"
+                                id="ssc_gpa" name="ssc_gpa" value="{{ $employee->ssc_gpa }}"
+                                placeholder="Enter Your GPA">
                             @error('ssc_gpa')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="ssc_year" name="ssc_year"
-                                value="{{ $employee->ssc_year }}" placeholder="Enter Your Passing Year">
+                            <input type="number" class="form-control  @error('ssc_year') is-invalid @enderror"
+                                id="ssc_year" name="ssc_year" value="{{ $employee->ssc_year }}"
+                                placeholder="Enter Your Passing Year">
                             @error('ssc_year')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -149,17 +152,19 @@
                 <div class="container">
                     <div class="row w-50">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="hsc_gpa" name="hsc_gpa"
-                                value="{{ $employee->hsc_gpa }}" placeholder="Enter Your GPA">
+                            <input type="number" class="form-control  @error('hsc_gpa') is-invalid @enderror"
+                                id="hsc_gpa" name="hsc_gpa" value="{{ $employee->hsc_gpa }}"
+                                placeholder="Enter Your GPA">
                             @error('hsc_gpa')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="hsc_year" name="hsc_year"
-                                value="{{ $employee->hsc_year }}" placeholder="Enter Your Passing Year">
+                            <input type="number" class="form-control  @error('hsc_year') is-invalid @enderror"
+                                id="hsc_year" name="hsc_year" value="{{ $employee->hsc_year }}"
+                                placeholder="Enter Your Passing Year">
                             @error('hsc_year')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -170,17 +175,19 @@
                 <div class="container">
                     <div class="row w-50">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="bsc_cgpa" name="bsc_cgpa"
-                                value="{{ $employee->bsc_cgpa }}" placeholder="Enter Your CGPA">
+                            <input type="number" class="form-control  @error('bsc_cgpa') is-invalid @enderror"
+                                id="bsc_cgpa" name="bsc_cgpa" value="{{ $employee->bsc_cgpa }}"
+                                placeholder="Enter Your CGPA">
                             @error('bsc_cgpa')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="bsc_year" name="bsc_year"
-                                value="{{ $employee->bsc_year }}" placeholder="Enter Your Passing Year">
+                            <input type="number" class="form-control  @error('bsc_year') is-invalid @enderror"
+                                id="bsc_year" name="bsc_year" value="{{ $employee->bsc_year }}"
+                                placeholder="Enter Your Passing Year">
                             @error('bsc_year')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -191,17 +198,19 @@
                 <div class="container">
                     <div class="row w-50">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="msc_cgpa" name="msc_cgpa"
-                                value="{{ $employee->msc_cgpa }}" placeholder="Enter Your CGPA">
+                            <input type="number" class="form-control  @error('msc_cgpa') is-invalid @enderror"
+                                id="msc_cgpa" name="msc_cgpa" value="{{ $employee->msc_cgpa }}"
+                                placeholder="Enter Your CGPA">
                             @error('msc_cgpa')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="msc_year" name="msc_year"
-                                value="{{ $employee->msc_year }}" placeholder="Enter Your Passing Year">
+                            <input type="number" class="form-control  @error('msc_year') is-invalid @enderror"
+                                id="msc_year" name="msc_year" value="{{ $employee->msc_year }}"
+                                placeholder="Enter Your Passing Year">
                             @error('msc_year')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -216,36 +225,39 @@
             <div class="mb-3">
                 <label for="previous_company_name" class="form-label">Previous Company Name <span
                         class="text-danger">*</span></label>
-                <input type="text" class="form-control w-25" id="previous_company_name"
-                    name="previous_company_name" value="{{ $employee->previous_company_name }}"
-                    placeholder="Enter Your Previous Company Name">
+                <input type="text" class="form-control w-25 @error('previous_company_name') is-invalid @enderror"
+                    id="previous_company_name" name="previous_company_name"
+                    value="{{ $employee->previous_company_name }}" placeholder="Enter Your Previous Company Name">
                 @error('previous_company_name')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="designation" class="form-label">Designation <span class="text-danger">*</span></label>
-                <input type="text" class="form-control w-25" id="designation" name="designation"
-                    value="{{ $employee->designation }}" placeholder="Enter Your Designation">
+                <input type="text" class="form-control w-25 @error('designation') is-invalid @enderror"
+                    id="designation" name="designation" value="{{ $employee->designation }}"
+                    placeholder="Enter Your Designation">
                 @error('designation')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="experience" name="experience"
-                    value="{{ $employee->experience }}" placeholder="Enter Your Years of Experience">
+                <input type="number" class="form-control w-25 @error('experience') is-invalid @enderror"
+                    id="experience" name="experience" value="{{ $employee->experience }}"
+                    placeholder="Enter Your Years of Experience">
                 @error('experience')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="current_Salary" class="form-label">Current Salary <span
                         class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="current_Salary" name="current_salary"
-                    value="{{ $employee->current_salary }}" placeholder="Enter Your Current Salary">
+                <input type="number" class="form-control w-25 @error('current_salary') is-invalid @enderror"
+                    id="current_Salary" name="current_salary" value="{{ $employee->current_salary }}"
+                    placeholder="Enter Your Current Salary">
                 @error('current_salary')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
         </fieldset>
