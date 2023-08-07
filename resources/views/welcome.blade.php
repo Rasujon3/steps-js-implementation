@@ -20,13 +20,35 @@
     {{-- Bootstrap CSS CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        /* .form-container { */
+        /* max-height: 500px; */
+        /* Adjust the height as needed */
+        /* overflow-y: auto; */
+        /* Enable vertical scrollbar when content overflows */
+        /* padding: 10px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        } */
+
+        /* Set a specific width for the form fields to prevent them from becoming too wide */
+        /* .form-control { */
+        /* width: 100% !important; */
+        /* Adjust as needed */
+        /* } */
+        /* Style the input fields with errors */
+        .has-error {
+            border: 1px solid red !important;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
             <div class="text-center w-100">
-                @if ($errors->any())
+                {{-- @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -34,7 +56,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif --}}
                 {{-- {{ dd($errors) }} --}}
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -53,206 +75,223 @@
         <h1 class="btn btn-secondary text-center w-100">Show Employees</h1>
     </a>
 
-    <form id="example-advanced-form" action="{{ url('/inserData') }}" class="form-control" method="post">
-        @csrf
-        <h3>Personal Information</h3>
-        <fieldset>
-            <legend>Personal Information</legend>
+    <div class="form-container">
+        <form id="example-advanced-form" action="{{ url('/inserData') }}" class="form-control" method="post">
+            @csrf
+            <h3>Personal Information</h3>
+            <fieldset>
+                <legend>Personal Information</legend>
 
-            <div class="mb-3">
-                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control w-25" id="name" name="name"
-                    value="{{ old('name') }}" placeholder="Enter Your Name">
-                {{ $errors->has('name') ? 'is-invalid' : '' }}
-                @error('name')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="age" name="age"
-                    value="{{ old('age') }}" placeholder="Enter Your Age">
-                @error('age')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="mobile" name="mobile"
-                    value="{{ old('mobile') }}" placeholder="Enter Your Mobile Number">
-                @error('mobile')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="nid" class="form-label">NID <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="nid" name="nid"
-                    value="{{ old('nid') }}" placeholder="Enter Your NID Number">
-                @error('nid')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
-                <textarea type="text" class="form-control w-25" id="address" name="address" placeholder="Enter Your Address">{{ old('address') }}</textarea>
-                @error('address')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="gender" class="form-label">Gender <span class="text-danger me-2">*</span></label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
-                    <label class="form-check-label" for="male">Male</label>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control w-25 @error('name') is-invalid @enderror" id="name"
+                        name="name" value="{{ old('name') }}" placeholder="Enter Your Name">
+                    {{-- {{ $errors->has('name') ? 'is-invalid' : '' }} --}}
+                    @error('name')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="female">
-                    <label class="form-check-label" for="female">Female</label>
+
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control w-25 @error('age') is-invalid @enderror" id="age"
+                        name="age" value="{{ old('age') }}" placeholder="Enter Your Age">
+                    @error('age')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="form-check form-check-inline ">
-                    <input class="form-check-input" type="radio" name="gender" id="others" value="others">
-                    <label class="form-check-label" for="others">Others</label>
+                <div class="mb-3">
+                    <label for="mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control w-25 @error('mobile') is-invalid @enderror" id="mobile"
+                        name="mobile" value="{{ old('mobile') }}" placeholder="Enter Your Mobile Number">
+                    @error('mobile')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-                @error('gender')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
+                <div class="mb-3">
+                    <label for="nid" class="form-label">NID <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control w-25 @error('nid') is-invalid @enderror" id="nid"
+                        name="nid" value="{{ old('nid') }}" placeholder="Enter Your NID Number">
+                    @error('nid')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+                    <textarea type="text" class="form-control w-25 @error('address') is-invalid @enderror" id="address" name="address"
+                        placeholder="Enter Your Address">{{ old('address') }}</textarea>
+                    @error('address')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Gender <span class="text-danger me-2">*</span></label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+                            checked>
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline ">
+                        <input class="form-check-input" type="radio" name="gender" id="others"
+                            value="others">
+                        <label class="form-check-label" for="others">Others</label>
+                    </div>
+                    @error('gender')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
 
-        </fieldset>
+            </fieldset>
 
-        <h3>Educational Qualifications</h3>
-        <fieldset>
-            <legend>Educational Qualifications</legend>
+            <h3>Educational Qualifications</h3>
+            <fieldset>
+                <legend>Educational Qualifications</legend>
 
-            <div class="mb-3">
-                <label for="ssc" class="form-label">SSC <span class="text-danger">*</span></label>
-                <div class="container">
-                    <div class="row w-50">
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="ssc_gpa" name="ssc_gpa"
-                                value="{{ old('ssc_gpa') }}" placeholder="Enter Your GPA">
-                            @error('ssc_gpa')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="ssc_year" name="ssc_year"
-                                value="{{ old('ssc_year') }}" placeholder="Enter Your Passing Year">
-                            @error('ssc_year')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                <div class="mb-3">
+                    <label for="ssc" class="form-label">SSC <span class="text-danger">*</span></label>
+                    <div class="container">
+                        <div class="row w-50">
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('ssc_gpa') is-invalid @enderror"
+                                    id="ssc_gpa" name="ssc_gpa" value="{{ old('ssc_gpa') }}"
+                                    placeholder="Enter Your GPA">
+                                @error('ssc_gpa')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('ssc_year') is-invalid @enderror"
+                                    id="ssc_year" name="ssc_year" value="{{ old('ssc_year') }}"
+                                    placeholder="Enter Your Passing Year">
+                                @error('ssc_year')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label for="hsc" class="form-label">HSC <span class="text-danger">*</span></label>
-                <div class="container">
-                    <div class="row w-50">
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="hsc_gpa" name="hsc_gpa"
-                                value="{{ old('hsc_gpa') }}" placeholder="Enter Your GPA">
-                            @error('hsc_gpa')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="hsc_year" name="hsc_year"
-                                value="{{ old('hsc_year') }}" placeholder="Enter Your Passing Year">
-                            @error('hsc_year')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="bsc" class="form-label">B.SC <span class="text-danger">*</span></label>
-                <div class="container">
-                    <div class="row w-50">
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="bsc_cgpa" name="bsc_cgpa"
-                                value="{{ old('bsc_cgpa') }}" placeholder="Enter Your CGPA">
-                            @error('bsc_cgpa')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="bsc_year" name="bsc_year"
-                                value="{{ old('bsc_year') }}" placeholder="Enter Your Passing Year">
-                            @error('bsc_year')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                <div class="mb-3">
+                    <label for="hsc" class="form-label">HSC <span class="text-danger">*</span></label>
+                    <div class="container">
+                        <div class="row w-50">
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('hsc_gpa') is-invalid @enderror"
+                                    id="hsc_gpa" name="hsc_gpa" value="{{ old('hsc_gpa') }}"
+                                    placeholder="Enter Your GPA">
+                                @error('hsc_gpa')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('hsc_year') is-invalid @enderror"
+                                    id="hsc_year" name="hsc_year" value="{{ old('hsc_year') }}"
+                                    placeholder="Enter Your Passing Year">
+                                @error('hsc_year')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label for="msc" class="form-label">M.SC </label>
-                <div class="container">
-                    <div class="row w-50">
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="msc_cgpa" name="msc_cgpa"
-                                value="{{ old('msc_cgpa') }}" placeholder="Enter Your CGPA">
-                            @error('msc_cgpa')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="msc_year" name="msc_year"
-                                value="{{ old('msc_year') }}" placeholder="Enter Your Passing Year">
-                            @error('msc_year')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                <div class="mb-3">
+                    <label for="bsc" class="form-label">B.SC <span class="text-danger">*</span></label>
+                    <div class="container">
+                        <div class="row w-50">
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('bsc_cgpa') is-invalid @enderror"
+                                    id="bsc_cgpa" name="bsc_cgpa" value="{{ old('bsc_cgpa') }}"
+                                    placeholder="Enter Your CGPA">
+                                @error('bsc_cgpa')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('bsc_year') is-invalid @enderror"
+                                    id="bsc_year" name="bsc_year" value="{{ old('bsc_year') }}"
+                                    placeholder="Enter Your Passing Year">
+                                @error('bsc_year')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </fieldset>
+                <div class="mb-3">
+                    <label for="msc" class="form-label">M.SC </label>
+                    <div class="container">
+                        <div class="row w-50">
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('msc_cgpa') is-invalid @enderror"
+                                    id="msc_cgpa" name="msc_cgpa" value="{{ old('msc_cgpa') }}"
+                                    placeholder="Enter Your CGPA">
+                                @error('msc_cgpa')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('msc_year') is-invalid @enderror"
+                                    id="msc_year" name="msc_year" value="{{ old('msc_year') }}"
+                                    placeholder="Enter Your Passing Year">
+                                @error('msc_year')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
 
-        <h3>Professional Information</h3>
-        <fieldset>
-            <legend>Professional Information</legend>
+            <h3>Professional Information</h3>
+            <fieldset>
+                <legend>Professional Information</legend>
 
-            <div class="mb-3">
-                <label for="previous_company_name" class="form-label">Previous Company Name <span
-                        class="text-danger">*</span></label>
-                <input type="text" class="form-control w-25" id="previous_company_name"
-                    name="previous_company_name" value="{{ old('previous_company_name') }}"
-                    placeholder="Enter Your Previous Company Name">
-                @error('previous_company_name')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="designation" class="form-label">Designation <span class="text-danger">*</span></label>
-                <input type="text" class="form-control w-25" id="designation" name="designation"
-                    value="{{ old('designation') }}" placeholder="Enter Your Designation">
-                @error('designation')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="experience" name="experience"
-                    value="{{ old('experience') }}" placeholder="Enter Your Years of Experience">
-                @error('experience')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="current_Salary" class="form-label">Current Salary <span
-                        class="text-danger">*</span></label>
-                <input type="number" class="form-control w-25" id="current_Salary" name="current_salary"
-                    value="{{ old('current_Salary') }}" placeholder="Enter Your Current Salary">
-                @error('current_salary')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-        </fieldset>
-    </form>
-
+                <div class="mb-3">
+                    <label for="previous_company_name" class="form-label">Previous Company Name <span
+                            class="text-danger">*</span></label>
+                    <input type="text"
+                        class="form-control w-25 @error('previous_company_name') is-invalid @enderror"
+                        id="previous_company_name" name="previous_company_name"
+                        value="{{ old('previous_company_name') }}" placeholder="Enter Your Previous Company Name">
+                    @error('previous_company_name')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="designation" class="form-label">Designation <span
+                            class="text-danger">*</span></label>
+                    <input type="text" class="form-control w-25 @error('designation') is-invalid @enderror"
+                        id="designation" name="designation" value="{{ old('designation') }}"
+                        placeholder="Enter Your Designation">
+                    @error('designation')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control w-25 @error('experience') is-invalid @enderror"
+                        id="experience" name="experience" value="{{ old('experience') }}"
+                        placeholder="Enter Your Years of Experience">
+                    @error('experience')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="current_Salary" class="form-label">Current Salary <span
+                            class="text-danger">*</span></label>
+                    <input type="number" class="form-control w-25 @error('current_salary') is-invalid @enderror"
+                        id="current_Salary" name="current_salary" value="{{ old('current_Salary') }}"
+                        placeholder="Enter Your Current Salary">
+                    @error('current_salary')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </fieldset>
+        </form>
+    </div>
     {{-- Bootstrap 5 Script File --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
