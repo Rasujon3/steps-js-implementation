@@ -168,21 +168,22 @@ class EmployeeController extends Controller
     {
         // $employee = DB::table('employee')->where('id', $id)->first();
         // __Using ORM __
-        // $employee = Employee::find($id);
-        $employeeArray = DB::table('employee_personal_information')
-            ->join('employee_educational_qualifications', 'employee_personal_information.id', '=', 'employee_educational_qualifications.emp_id')
-            ->join('employee_professional_information', 'employee_personal_information.id', '=', 'employee_professional_information.employees_id')
-            ->where('employee_personal_information.id', '=', $id)
-            ->get();
-        $employee = $employeeArray[0];
-        // dd($employee[0]);
-        return view('edit', compact('employee'));
+
+        $employee = EmployeePersonalInformation::with('educationalQualifications', 'professionalInformation')
+            ->find($id);
+        $employee1 = ($employee['educationalQualifications']);
+        $employee2 = ($employee['professionalInformation']);
+
+        return view('edit', compact('employee', 'employee1', 'employee2'));
 
     }
 
-    public function UpdateData($id, PersonalInfoRequest $personalInfoRequest,
+    public function UpdateData(
+        $id,
+        PersonalInfoRequest $personalInfoRequest,
         EducationalInfoRequest $educationalInfoRequest,
-        ProfessionalInfoRequest $professionalInfoRequest) {
+        ProfessionalInfoRequest $professionalInfoRequest
+    ) {
         $personal_info_data = $personalInfoRequest->validated();
         $edu_info_data = $educationalInfoRequest->validated();
         $professional_info_data = $professionalInfoRequest->validated();

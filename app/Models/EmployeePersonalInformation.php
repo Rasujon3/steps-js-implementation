@@ -30,6 +30,10 @@ class EmployeePersonalInformation extends Model
     {
         return $this->hasOne(EmployeeEducationalQualification::class, 'emp_id', 'id');
     }
+    public function educationalQualification()
+    {
+        return $this->hasMany(EmployeeEducationalQualification::class, 'emp_id', 'id');
+    }
     public function professionalInformation()
     {
         return $this->hasOne(EmployeeProfessionalInformation::class, 'employees_id', 'id');
