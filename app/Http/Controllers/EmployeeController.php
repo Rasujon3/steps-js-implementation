@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EducationalInfoRequest;
+use App\Http\Requests\PersonalInfoRequest;
+use App\Http\Requests\ProfessionalInfoRequest;
 use App\Models\EmployeeEducationalQualification;
 use App\Models\EmployeePersonalInformation;
 use App\Models\EmployeeProfessionalInformation;
@@ -15,66 +18,32 @@ class EmployeeController extends Controller
     {
         return view('welcome');
     }
-    public function InsertData(Request $req)
-    {
-        $personal_info_data = $req->validate([
-            'name' => 'required|string',
-            'age' => 'required|numeric',
-            'mobile' => 'required|string',
-            'nid' => 'required|string',
-            'address' => 'required|string',
-            'gender' => 'required|string',
+    public function InsertData(
+        PersonalInfoRequest $personalInfoRequest,
+        EducationalInfoRequest $educationalInfoRequest,
+        ProfessionalInfoRequest $professionalInfoRequest
+    ) {
 
-        ]);
-        $edu_info_data = $req->validate([
+        // dd($personalInfoRequest);
+        $personal_info_data = $personalInfoRequest->validated();
+        $edu_info_data = $educationalInfoRequest->validated();
+        $professional_info_data = $professionalInfoRequest->validated();
 
-            'ssc_gpa' => 'required|decimal:0,2',
-            'ssc_year' => 'required|numeric',
-            'hsc_gpa' => 'required|decimal:0,2',
-            'hsc_year' => 'required|numeric',
-            'bsc_cgpa' => 'required|decimal:0,2',
-            'bsc_year' => 'required|numeric',
-            'msc_cgpa' => 'nullable|decimal:0,2',
-            'msc_year' => 'nullable|numeric',
-
-        ]);
-        $professional_info_data = $req->validate([
-
-            'previous_company_name' => 'required|string',
-            'designation' => 'required|string',
-            'experience' => 'required|decimal:0,2',
-            'current_salary' => 'required|decimal:0,2',
-        ]);
         DB::beginTransaction();
         try {
-            // Custom validation
-            // $designation = $req->get('designation');
-            // $name = $req->get('name');
-            // $previous_company_name = $req->get('previous_company_name');
-
-            // if (intval($designation) || intval($name) || intval($previous_company_name)) {
-            //     return redirect()->back()->with('error', 'Integer number is not allowed for name, designation & previous company name.');
-            // }
 
             // Insert into EmployeePersonalInformation
             $personalInfo = EmployeePersonalInformation::create($personal_info_data);
             // dd($personalInfo);
             if ($personalInfo) {
-
                 // Insert into EmployeeEducationalQualification
-
                 $eduInfo = EmployeeEducationalQualification::create($edu_info_data + ['emp_id' => $personalInfo->id]);
-                // dd($eduInfo);
-                // return $eduInfo;
+
             }
-
-            // dd($eduInfo);
             if ($personalInfo && $eduInfo) {
-
                 // Insert into EmployeeProfessionalInformation
                 $professionalInfo = EmployeeProfessionalInformation::create($professional_info_data + ['employees_id' => $personalInfo->id]);
             }
-
             DB::commit(); // // If all inserts succeed, commit the transaction
             return redirect('/employees')->with('success', 'Data inserted successfully.');
         } catch (\Exception $e) {
@@ -84,17 +53,6 @@ class EmployeeController extends Controller
             // return redirect()->back()->with($errors)->withInput();
         }
 
-        // $insert = DB::table('employee')->insert($data);
-        // __Using ORM __
-        // $Personal_info_data_insert = EmployeePersonalInformation::create($personal_info_data);
-        // if ($Personal_info_data_insert) {
-        //     $edu_info_data_insert = EmployeeEducationalQualification::create($edu_info_data);
-        // } elseif ($Personal_info_data_insert) {
-        //     $Professional_info_data_insert = EmployeeProfessionalInformation::create($professional_info_data);
-        //     return redirect('/employees');
-        // } else {
-        //     return 'Data insert failed';
-        // }
     }
     public function ShowEmployee(Request $request)
     {
@@ -108,17 +66,6 @@ class EmployeeController extends Controller
         /* ********************************************************** */
 
         // __ Using Eloquent ORM __
-
-        // $data = EmployeePersonalInformation::with('educationalQualifications')->with("professionalInformation")->get()->toArray();
-        // dd($data[0]->id);
-
-        // $data = EmployeePersonalInformation::with('educationalQualifications', 'professionalInformation')->get();
-        // $firstRecordId = $data[0]->id;
-
-        // dd($data);
-
-        // $data = EmployeePersonalInformation::with('educationalQualifications', 'professionalInformation')->get()->toArray();
-        // dd($data);
 
         $data = EmployeePersonalInformation::with('educationalQualifications', 'professionalInformation')
             ->get();
@@ -233,38 +180,12 @@ class EmployeeController extends Controller
 
     }
 
-    public function UpdateData($id, Request $req)
-    {
-        $personal_info_data = $req->validate([
-            'name' => 'required|string',
-            'age' => 'required|numeric',
-            'mobile' => 'required|string',
-            'nid' => 'required|string',
-            'address' => 'required|string',
-            'gender' => 'required|string',
-
-        ]);
-
-        $edu_info_data = $req->validate([
-
-            'ssc_gpa' => 'required|decimal:0,2',
-            'ssc_year' => 'required|numeric',
-            'hsc_gpa' => 'required|decimal:0,2',
-            'hsc_year' => 'required|numeric',
-            'bsc_cgpa' => 'required|decimal:0,2',
-            'bsc_year' => 'required|numeric',
-            'msc_cgpa' => 'nullable|decimal:0,2',
-            'msc_year' => 'nullable|numeric',
-
-        ]);
-
-        $professional_info_data = $req->validate([
-
-            'previous_company_name' => 'required|string',
-            'designation' => 'required|string',
-            'experience' => 'required|decimal:0,2',
-            'current_salary' => 'required|decimal:0,2',
-        ]);
+    public function UpdateData($id, PersonalInfoRequest $personalInfoRequest,
+        EducationalInfoRequest $educationalInfoRequest,
+        ProfessionalInfoRequest $professionalInfoRequest) {
+        $personal_info_data = $personalInfoRequest->validated();
+        $edu_info_data = $educationalInfoRequest->validated();
+        $professional_info_data = $professionalInfoRequest->validated();
 
         DB::beginTransaction();
         try {
@@ -276,12 +197,7 @@ class EmployeeController extends Controller
                 // Update into EmployeeEducationalQualification
 
                 $eduInfoUpdate = EmployeeEducationalQualification::where('emp_id', $id)->update($edu_info_data);
-                // $eduInfoUpdate = $data->educationalQualifications()
-                //     ->where('emp_id', $id)
-                //     ->update($edu_info_data);
 
-                // dd($eduInfoUpdate);
-                // return $eduInfo;
             }
             // dd($eduInfoUpdate);
             if ($personalInfoUpdate && $eduInfoUpdate) {
@@ -289,9 +205,7 @@ class EmployeeController extends Controller
                 // Update into EmployeeProfessionalInformation
 
                 $eduInfoUpdate = EmployeeProfessionalInformation::where('employees_id', $id)->update($professional_info_data);
-                // $eduInfoUpdate = $data->professionalInformation()
-                //     ->where('employees_id', $id)
-                //     ->update($professional_info_data);
+
             }
 
             DB::commit(); // // If all inserts succeed, commit the transaction
